@@ -1,0 +1,96 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Exam {
+
+    int studentPopulation;
+    double[] CGPA;
+    ArrayList<String> studentClass = new ArrayList<>();
+   public static void main(String[] args) {
+        
+        //create an instance of the Exam class to access the methods
+        Exam exam = new Exam();
+        
+        exam.classPopulation();
+        exam.studentCGPA();
+        exam.studentClassSort();
+        exam.classOutput();
+    }
+    
+//METHOD 1
+    public void classPopulation(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the population of students not more than 100");
+        studentPopulation = scanner.nextInt();
+        CGPA = new double[studentPopulation];
+    }
+    
+//METHOD 2
+    public void  studentCGPA(){
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 0; i < studentPopulation; i++){
+            System.out.println("Enter Student " + (i+1) + "CGPA ");
+            double n = scanner.nextDouble();
+            CGPA[i] = n;
+        }
+
+    }
+    
+//METHOD 3 - sort the cgpas
+    public void studentClassSort(){
+        //loop through array and grade for each of them
+        for(int i= 0; i < CGPA.length; i++){
+            if (CGPA[i] > 4.5){
+                studentClass.add("1st Class");
+            }
+            else if(CGPA[i] >= 3.5 && CGPA[i] < 4.49)
+            {
+                studentClass.add("2nd Class Upper");
+            }
+            else if(CGPA[i] >= 2.49 && CGPA[i] <= 3.49)
+            {
+                studentClass.add("2nd Class Lower");
+            }
+            else if(CGPA[i] >= 1.5 && CGPA[i] < 2.39)
+            {
+                studentClass.add("3rd Class");
+            }else if(CGPA[i] >= 0 && CGPA[i] < 1.49){
+                studentClass.add("Fail"); 
+            }
+        } 
+        
+    }
+   
+    //METHOD 4 — output in that format
+    public void classOutput(){
+        int firstClass = 0, secondUpperClass = 0, secondLowerClass = 0, thirdClass = 0, fail = 0;
+        for(int i = 0; i < studentClass.size(); i++){
+            if (studentClass.get(i).equalsIgnoreCase("1st Class") ){
+                firstClass++;
+            }
+            if (studentClass.get(i).equalsIgnoreCase("2nd Class Upper") ){
+                secondUpperClass++;
+            }
+            if (studentClass.get(i).equalsIgnoreCase("2nd Class Lower") ){
+                secondLowerClass++;
+            }
+            if (studentClass.get(i).equalsIgnoreCase("3rd Class") ){
+                thirdClass++;
+            }
+            if (studentClass.get(i).equalsIgnoreCase("Fail") ){
+                fail++;
+            }
+        }
+        
+        System.out.println("CGPA\t\tClassof degree\tTotal Student with class of degree");
+        System.out.println("4.5-5.0\t\t1st Class\t" + firstClass);
+        System.out.println("3.5-4.49\t2nd Class Upper\t" + secondUpperClass);
+        System.out.println("2.4-3.49\t2nd Class Lower\t" + secondLowerClass);
+        System.out.println("1.5-2.39\t3rd Class\t" + thirdClass);
+        System.out.println("0-1.49\t\tfail\t\t" + fail);
+
+    }
+
+}
