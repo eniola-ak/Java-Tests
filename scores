@@ -1,0 +1,114 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author eniola
+ * 
+ * 
+ * Student Grade - Used to find the grade of students in a class
+ * @getPopulation - gets the population of the students
+ * @setPercentageScores - stores the percentage scores of each student
+ * @setStudentGrade - stores the grade based on the index of the percentage score array
+ */
+public class Exam{
+    public static void main(String[] args) {
+
+//An instance of StudentGrade Class
+    StudentGrade exam = new StudentGrade();
+  
+   exam.getPopulation();
+   exam.setPercentageScores();
+  exam.setStudentGrade();
+   exam.printTable();    
+       
+    }
+
+public class StudentGrade {
+    int classPopulation;
+    double[] studentPercentageScore;
+    ArrayList <String>grade = new ArrayList<>();
+    
+    //Method A
+    public void getPopulation(){
+        //instantiate the scanner
+        Scanner scan = new Scanner(System.in);
+        //get the input
+        System.out.println("Enter the total population");
+        classPopulation = scan.nextInt();
+        //store the input as the dimesion of the array
+        studentPercentageScore = new double[classPopulation];
+        //  
+    }
+    
+    //Method B
+    public void setPercentageScores(){     
+      //instantiate the scanner
+      Scanner scan = new Scanner(System.in);
+      //use a for loop to take in all the student grades from the first one
+      for(int i = 0; i < classPopulation; i++){
+          System.out.println("Print Student " + (i+1) +" grade");
+          double input = scan.nextDouble();
+           studentPercentageScore[i] = input;
+      }   
+    }
+    
+    //Method C
+    public void setStudentGrade(){
+        //we use a for loop here to set the value of the student grade(A,B,C...) based on the student percentage score
+        for(int i = 0; i < studentPercentageScore.length; i++){
+        //set studentPercentageScore to grade 
+        if(studentPercentageScore[i] >= 70 && studentPercentageScore[i] <=100){
+            grade.add("A");
+        }
+        else if(studentPercentageScore[i] >= 60 && studentPercentageScore[i] <=69){
+            grade.add("B");
+        }
+        else if(studentPercentageScore[i] >= 50 && studentPercentageScore[i] <=59){
+            grade.add("C");
+        }
+        else if(studentPercentageScore[i] >= 45 && studentPercentageScore[i] <=49){
+            grade.add("D");
+        }
+        else if(studentPercentageScore[i] >= 0 && studentPercentageScore[i] <=44){
+            grade.add("F");
+        }
+        }
+    }
+    
+    //Method D
+    void printTable(){
+    //Used to count the frequency of grades we have
+    //initialize the grades
+    int a_grade = 0,b_grade = 0,c_grade = 0,d_grade = 0 ,f_grade = 0;
+    //use a for loop to loop through the grade array list
+    //this is (for each) just like for loop but you could use the normal for , maybe ruyi doesnt use this
+    for(String stud : grade){
+        if(stud.equals("A")){
+            a_grade++;
+        }
+        if(stud.equals("B")){
+            b_grade++;
+        }
+        if(stud.equals("C")){
+            c_grade++;
+        }
+        if(stud.equals("F")){
+            d_grade++;
+        }
+        if(stud.equals("F")){
+            f_grade++;
+        }
+    }
+    //print out to a table, the \t is an escape character just like tab on your keyboard
+    System.out.println("Percentage Score\tGrade\tTotal Students with Grade");
+    System.out.println("70-100\t\t\tA\t" + a_grade);
+    System.out.println("60-69\t\t\tB\t" + b_grade);
+    System.out.println("50-59\t\t\tC\t" + c_grade);
+    System.out.println("45-49\t\t\tD\t" + d_grade);
+    System.out.println("0-44\t\t\tF\t" + f_grade);
+    }
+
+
+   }
+}
